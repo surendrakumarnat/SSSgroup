@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>Candidate Enrollment Form</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f7;
+    }
+    .header {
+      background: #0083b0;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    .logo img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+      border-radius: 50%;
+    }
+    .nav {
+      font-size: 16px;
+    }
+    .container {
+      max-width: 400px;
+      margin: 40px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .container h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #333;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #00b4db;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    .btn:hover {
+      background-color: #0083b0;
+    }
+    #qrPage img {
+      width: 250px;
+      margin-bottom: 15px;
+    }
+    .note {
+      color: red;
+      font-size: 14px;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .footer {
+      background-color: #e6f0f5;
+      text-align: center;
+      padding: 20px;
+      font-size: 15px;
+      color: #333;
+    }
+    .footer a {
+      color: #0083b0;
+      text-decoration: none;
+    }
+    #qrPage {
+      display: none;
+      max-width: 400px;
+      margin: 40px auto;
+      padding: 30px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .nav-img {
+      width: 100%;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<!-- Header -->
+<div class="header">
+  <div class="logo">
+    <img src="logo.png" alt="Logo">
+    <div><strong>Sss group shipping services counselor</strong></div>
+  </div>
+  <div class="nav"><a href="#" style="color:white; text-decoration:none;">About Us</a>
+    📞 Contact me: 9928098217 , 8696798858
+  </div>
+</div>
+
+
+<!-- Enrollment Form -->
+<div class="container" id="formPage">
+  <h2>Candidate Enrollment Form</h2>
+  <form onsubmit="event.preventDefault(); showQRPage();">
+    <div class="form-group">
+      <input type="text" placeholder="आपका नाम" required>
+    </div>
+    <div class="form-group">
+      <input type="text" placeholder="आपका फ़ोन नंबर" required>
+    </div>
+    <div class="form-group">
+      <input type="text" placeholder="ज़िला" required>
+    </div>
+    <div class="form-group">
+      <input type="text" placeholder="राज्य" required>
+    </div>
+    <button type="submit" class="btn">आगे बढ़ें</button>
+  </form>
+  <img src="form.jpg" class="nav-img" alt="Navigation">
+</div>
+
+<!-- QR Payment Page -->
+<div id="qrPage">
+  <h2>QR Code Payment</h2>
+  <img src="qr.png" alt="QR Code"> <!-- Make sure 'qr.png' is hosted or available in same directory -->
+  <p><strong>(₹300 हैंडलिंग शुल्क का भुगतान करें)</strong></p>
+  <p><strong>UPI ID:</strong> 745483518566@ibl</p>
+  <p class="note">नोट: यदि आप भुगतान नहीं करेंगे तो आपकी जानकारी सबमिट नहीं होगी। कृपया ₹300 ज़रूर करें।</p>
+  <button class="btn" onclick="submitForm()">Submit</button>
+  <button class="btn" onclick="showHelp()">Help</button>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p><strong>Contact Me:</strong> 9928098217 , 8696798858</p>
+  <p>
+    <strong>WhatsApp:</strong> <a href="https://wa.link/i5s2af" target="_blank">https://wa.link/i5s2af</a> |
+    <strong>Instagram:</strong> <a href="https://www.instagram.com/sss_group_merchant_navy_?igsh=ZHZzMHFvZG9ja2E3" target="_blank">@sss_group_merchant_navy_</a>
+  </p>
+  <p>Thank you!</p>
+</div>
+
+<!-- JavaScript -->
+<script>
+  function showQRPage() {
+    document.getElementById("formPage").style.display = "none";
+    document.getElementById("qrPage").style.display = "block";
+  }
+
+  function submitForm() {
+    alert("❌ Error: Payment verification failed!\nकृपया पहले ₹300 का भुगतान करें।");
+  }
+
+  function showHelp() {
+    alert("📞 Contact me: 9928098217 , 8696798858");
+  }
+</script>
+
+</body>
+</html>
