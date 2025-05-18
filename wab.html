@@ -2,57 +2,79 @@
 <html lang="hi">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Candidate Enrollment Form</title>
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: #f0f4f7;
+      padding: 0;
+      box-sizing: border-box;
     }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f4f7;
+      color: #000;
+    }
+
     .header {
       background: #0083b0;
       color: white;
-      padding: 10px 20px;
+      padding: 15px 20px;
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
     }
+
     .logo {
       display: flex;
       align-items: center;
     }
+
     .logo img {
       width: 50px;
       height: 50px;
       margin-right: 10px;
       border-radius: 50%;
     }
+
     .nav {
-      font-size: 16px;
+      font-size: 14px;
+      text-align: right;
     }
-    .container {
-      max-width: 400px;
-      margin: 40px auto;
-      padding: 30px;
+
+    .container,
+    #qrPage {
+      width: 95%;
+      max-width: 480px;
+      margin: 20px auto;
+      padding: 20px;
       background: white;
       border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     }
-    .container h2 {
+
+    h2 {
       text-align: center;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
       color: #333;
     }
+
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
+
     .form-group input {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
+      font-size: 15px;
       border: 1px solid #ccc;
       border-radius: 8px;
-      font-size: 15px;
+      background: #fff;
+      color: #000;
     }
+
     .btn {
       width: 100%;
       padding: 12px;
@@ -62,63 +84,94 @@
       border-radius: 8px;
       font-size: 16px;
       cursor: pointer;
-      margin-bottom: 10px;
+      margin-top: 10px;
     }
+
     .btn:hover {
       background-color: #0083b0;
     }
+
+    .nav-img,
     #qrPage img {
-      width: 250px;
-      margin-bottom: 15px;
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 15px;
+      cursor: zoom-in;
     }
+
     .note {
       color: red;
       font-size: 14px;
       margin-top: 10px;
       font-weight: bold;
     }
+
     .footer {
       background-color: #e6f0f5;
       text-align: center;
       padding: 20px;
-      font-size: 15px;
+      font-size: 14px;
       color: #333;
     }
+
     .footer a {
       color: #0083b0;
       text-decoration: none;
     }
+
     #qrPage {
       display: none;
-      max-width: 400px;
-      margin: 40px auto;
-      padding: 30px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
       text-align: center;
     }
-    .nav-img {
+
+    /* Fullscreen QR style */
+    #fullscreenQR {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
       width: 100%;
-      margin-top: 20px;
-      border-radius: 8px;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      cursor: zoom-out;
+    }
+
+    #fullscreenImg {
+      max-width: 90%;
+      max-height: 90%;
+      border: 8px solid white;
+      border-radius: 10px;
+    }
+
+    @media screen and (max-width: 480px) {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav {
+        text-align: left;
+        margin-top: 10px;
+      }
     }
   </style>
 </head>
 <body>
 
 <!-- Header -->
-<!-- Header -->
 <div class="header">
   <div class="logo">
     <img src="logo.png" alt="Logo">
     <div><strong>Sss group shipping services counselor</strong></div>
   </div>
-  <div class="nav"><a href="#" style="color:white; text-decoration:none;">About Us</a>
-    📞 Contact me: 9928098217 , 8696798858
+  <div class="nav">
+    <a href="#" style="color:white;">About Us</a><br>
+    📞 9928098217 , 8696798858
   </div>
 </div>
-
 
 <!-- Enrollment Form -->
 <div class="container" id="formPage">
@@ -144,7 +197,7 @@
 <!-- QR Payment Page -->
 <div id="qrPage">
   <h2>QR Code Payment</h2>
-  <img src="qr.png" alt="QR Code"> <!-- Make sure 'qr.png' is hosted or available in same directory -->
+  <img src="qr.png" alt="QR Code" onclick="openFullScreenQR()">
   <p><strong>(₹300 हैंडलिंग शुल्क का भुगतान करें)</strong></p>
   <p><strong>UPI ID:</strong> 745483518566@ibl</p>
   <p class="note">नोट: यदि आप भुगतान नहीं करेंगे तो आपकी जानकारी सबमिट नहीं होगी। कृपया ₹300 ज़रूर करें।</p>
@@ -152,17 +205,22 @@
   <button class="btn" onclick="showHelp()">Help</button>
 </div>
 
+<!-- Fullscreen QR Viewer -->
+<div id="fullscreenQR">
+  <img id="fullscreenImg" src="qr.png" alt="QR Code Fullscreen">
+</div>
+
 <!-- Footer -->
 <div class="footer">
   <p><strong>Contact Me:</strong> 9928098217 , 8696798858</p>
   <p>
-    <strong>WhatsApp:</strong> <a href="https://wa.link/i5s2af" target="_blank">https://wa.link/i5s2af</a> |
+    <strong>WhatsApp:</strong> <a href="https://wa.link/i5s2af" target="_blank">wa.link/i5s2af</a> |
     <strong>Instagram:</strong> <a href="https://www.instagram.com/sss_group_merchant_navy_?igsh=ZHZzMHFvZG9ja2E3" target="_blank">@sss_group_merchant_navy_</a>
   </p>
   <p>Thank you!</p>
 </div>
 
-<!-- JavaScript -->
+<!-- Scripts -->
 <script>
   function showQRPage() {
     document.getElementById("formPage").style.display = "none";
@@ -176,6 +234,14 @@
   function showHelp() {
     alert("📞 Contact me: 9928098217 , 8696798858");
   }
+
+  function openFullScreenQR() {
+    document.getElementById("fullscreenQR").style.display = "flex";
+  }
+
+  document.getElementById("fullscreenQR").addEventListener("click", function () {
+    this.style.display = "none";
+  });
 </script>
 
 </body>
